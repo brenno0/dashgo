@@ -1,11 +1,21 @@
-import {Flex} from '@chakra-ui/react'
+import {Flex, Icon, IconButton, useBreakpointValue} from '@chakra-ui/react'
 import React from 'react'
+import { RiMenuLine } from 'react-icons/ri'
+import { useSidebarDrawer } from '../../contexts/SideBarDrawerContext'
 import { Logo } from './Logo'
 import { NotificationsNav } from './NotificationsNav'
 import { Profile } from './Profile'
 import { SearcBox } from './SearchBox'
 
 export const Header = () => {
+
+ 
+    const { onOpen } = useSidebarDrawer()
+    
+    const isWideVerstion = useBreakpointValue({
+        base: false,
+        lg:true
+    })
     return (
         <Flex 
         as="header"
@@ -17,14 +27,23 @@ export const Header = () => {
         px="6"
         align="center"
         >
+            { !isWideVerstion &&(
+                <IconButton icon={<Icon as={RiMenuLine} />}
+                    fontSize="24" 
+                    variant="unstyled" 
+                    onClick={onOpen}
+                    aria-label="Open navigation" 
+                    mr="2"
+                >
+                    
+                </IconButton>
+            ) }
             <Logo />
-            <SearcBox />
-
+            { isWideVerstion && (<SearcBox />) }
 
             <Flex align="center" ml="auto">
-               
-                <Profile />
                 <NotificationsNav />
+                <Profile showProfileData={isWideVerstion} />
             </Flex>
         
         </Flex>
