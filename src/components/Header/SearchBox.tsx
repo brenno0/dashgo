@@ -1,8 +1,14 @@
 import { Flex, Icon, Input } from '@chakra-ui/react'
-import React from 'react'
+import React, { useRef } from 'react'
 import { RiSearchLine } from 'react-icons/ri'
 
+
+
 export function SearcBox() {
+
+
+    const searchInputRef = useRef<HTMLInputElement>(null);
+    
     return (
         <Flex
         as="label"
@@ -18,6 +24,7 @@ export function SearcBox() {
         borderRadius="full"
         >
             <Input 
+            ref={searchInputRef}
             color="gray.50" 
             variant="unstyled" 
             placeholder="Buscar na plataforma" 
